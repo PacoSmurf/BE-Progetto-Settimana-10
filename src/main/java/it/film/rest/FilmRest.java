@@ -73,16 +73,17 @@ public class FilmRest {
 		
 	}
 	}
+	
 	@GetMapping("/{id}")
 	@ApiOperation(value="trova film per id", notes="Trova unfilm per id")
-	public ResponseEntity<List<Film>> trovaPerId(@PathVariable int id){
+	public ResponseEntity<Film> trovaPerId(@PathVariable int id){
 		try {
 			
-			 return new ResponseEntity<List<Film>>( fl.trovaTutti(),HttpStatus.OK);
+			return new ResponseEntity<Film>((Film)fl.trovaById(id), HttpStatus.OK);
 			
 			
 		} catch (Exception e) {
-			return new ResponseEntity<List<Film>>((List <Film>)null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Film>( (Film)null, HttpStatus.BAD_REQUEST);
 			
 		}
 		
@@ -105,6 +106,7 @@ public class FilmRest {
 @ApiOperation(value="trova  per regista", notes="Trova un regista")
 public ResponseEntity<List<Film>> trovaPerRegista(@PathVariable  String regista){
 	try {
+		
 		
 		 return new ResponseEntity<List<Film>>( fl.trovaByRegista(regista),HttpStatus.ACCEPTED);
 		
